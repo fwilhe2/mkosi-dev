@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         architecture:
-        # - 'arm64'
+        - 'arm64'
         - 'x86-64'
     steps:
     - uses: actions/checkout@v3
@@ -31,3 +31,4 @@ jobs:
       with:
         name: debian-image-${{ matrix.architecture }}
         path: debian/debian.raw
+        retention-days: 2
