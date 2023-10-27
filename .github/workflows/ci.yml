@@ -30,5 +30,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: debian-image-${{ matrix.architecture }}
-        path: debian.raw
-      working-directory: debian
+        path: debian/debian.raw
