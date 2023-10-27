@@ -1,0 +1,34 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        architecture:
+        # - 'arm64'
+        - 'x86-64'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Setup mkosi
+      uses: systemd/mkosi@v18
+    - name: Summary
+      run: |
+        sudo mkosi summary
+      working-directory: debian
+    - name: Build Image
+      run: |
+        sudo mkosi --root-password=toor --architecture=${{ matrix.architecture }}
+      working-directory: debian
+    - name: Upload Image
+      uses: actions/upload-artifact@v3
+      with:
+        name: debian-image-${{ matrix.architecture }}
+        path: debian.raw
+      working-directory: debian
