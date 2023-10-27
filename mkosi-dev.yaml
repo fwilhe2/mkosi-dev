@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: Florian Wilhelm
+# SPDX-License-Identifier: Apache-2.0
+
+# Based on the examples by Akihiro Suda and the lima contributors, see https://github.com/lima-vm/lima, distributed under Apache-2.0 license
+
+# limactl create --name mkosi-dev mkosi-dev.yaml
+# limactl start mkosi-dev
+# less +F ${LIMA_HOME:-$HOME/.lima}/.lima/mkosi-dev/serial*.log
+# echo "Include ${LIMA_HOME:-$HOME/.lima}/mkosi-dev/ssh.config" >> ~/.ssh/config
+# limactl shell mkosi-dev
+
+# Connect to vs code ssh remote plugin via name 'lima-mkosi-dev'
+
+vmType: qemu
+os: Linux
+memory: 8GiB
+ssh:
+  loadDotSSHPubKeys: true
+containerd:
+  system: false
+  user: false
+
+images:
+- location: "https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-amd64-daily.qcow2"
+  arch: "x86_64"
+- location: "https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-arm64-daily.qcow2"
+  arch: "aarch64"
+
+mounts:
+- location: "~"
+- location: "/tmp/lima"
+  writable: true
+
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get -y install mkosi systemd-boot dosfstools mtools
