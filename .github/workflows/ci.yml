@@ -1,10 +1,10 @@
-name: CI
+name: Build Images
 on:
   push:
   workflow_dispatch:
 
 jobs:
-  build:
+  debian-image:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,4 +31,33 @@ jobs:
       with:
         name: debian-image-${{ matrix.architecture }}
         path: debian/debian.raw
+        retention-days: 2
+
+  fedora-image:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        architecture:
+        - 'arm64'
+        - 'x86-64'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Setup mkosi
+      uses: systemd/mkosi@v18
+    - name: Summary
+      run: |
+        sudo mkosi summary
+      working-directory: fedora
+    - name: Build Image
+      run: |
+        sudo mkosi --root-password=toor --architecture=${{ matrix.architecture }}
+      working-directory: fedora
+    - name: Upload Image
+      uses: actions/upload-artifact@v3
+      with:
+        name: fedora-image-${{ matrix.architecture }}
+        path: fedora/fedora.raw
         retention-days: 2
