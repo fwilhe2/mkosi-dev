@@ -12,3 +12,23 @@ limactl shell mkosi-dev
 ```
 
 Connect to vs code ssh remote plugin via name 'lima-mkosi-dev'
+
+## Using with lima
+
+Download images
+
+```
+gh run download --name fedora-image-x86-64
+gh run download --name fedora-image-arm64
+
+gh run download --name debian-image-x86-64
+gh run download --name debian-image-arm64
+```
+
+Create vm
+
+```
+limactl create --name fedora fedora.yaml
+
+limactl create --name debian debian.yaml
+```
