@@ -9,8 +9,3 @@ images:
 containerd:
   system: false
   user: false
-
-mounts:
-- location: "~"
-- location: "/tmp/lima"
-  writable: true
