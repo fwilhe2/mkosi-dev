@@ -26,11 +26,6 @@ images:
 - location: "https://cloud.debian.org/images/cloud/sid/daily/latest/debian-sid-genericcloud-arm64-daily.qcow2"
   arch: "aarch64"
 
-mounts:
-- location: "~"
-- location: "/tmp/lima"
-  writable: true
-
 provision:
 - mode: system
   script: |
