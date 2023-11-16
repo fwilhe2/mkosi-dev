@@ -33,7 +33,7 @@ provision:
     set -eux -o pipefail
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
-    apt-get -y install git qemu-system-x86 qemu-system-arm qemu-efi-aarch64 qemu-user-static mkosi systemd-boot dosfstools mtools
+    apt-get -y install git qemu-system-x86 qemu-system-arm qemu-efi-aarch64 qemu-user-static mkosi systemd-boot dosfstools mtools rootlesskit
 
 - mode: user
   script: |
