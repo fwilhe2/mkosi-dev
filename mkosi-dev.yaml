@@ -21,9 +21,9 @@ containerd:
   user: false
 
 images:
-- location: "https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-amd64-daily.qcow2"
+- location: "https://cloud.debian.org/images/cloud/sid/daily/latest/debian-sid-genericcloud-amd64-daily.qcow2"
   arch: "x86_64"
-- location: "https://cloud.debian.org/images/cloud/trixie/daily/latest/debian-13-genericcloud-arm64-daily.qcow2"
+- location: "https://cloud.debian.org/images/cloud/sid/daily/latest/debian-sid-genericcloud-arm64-daily.qcow2"
   arch: "aarch64"
 
 mounts:
