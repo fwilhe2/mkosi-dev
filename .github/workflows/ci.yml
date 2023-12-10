@@ -63,5 +63,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.distro }}-dev-image-${{ matrix.architecture }}
-        path: ${{ matrix.distro }}-dev.raw
+        path: ${{ matrix.distro }}.raw
         retention-days: 3
