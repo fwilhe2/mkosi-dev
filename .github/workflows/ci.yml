@@ -44,6 +44,9 @@ jobs:
         architecture:
         - 'arm64'
         - 'x86-64'
+        distro:
+        - debian
+        - fedora
     steps:
     - uses: actions/checkout@v4
     - name: Set up QEMU
@@ -52,13 +55,13 @@ jobs:
       uses: systemd/mkosi@v19
     - name: Summary
       run: |
-        sudo mkosi --distribution=debian summary
+        sudo mkosi --distribution=${{ matrix.distro }} --profile=dev summary
     - name: Build Image
       run: |
-        sudo mkosi --root-password=toor --distribution=debian --profile=dev --architecture=${{ matrix.architecture }}
+        sudo mkosi --root-password=toor --distribution=${{ matrix.distro }} --profile=dev --architecture=${{ matrix.architecture }}
     - name: Upload Image
       uses: actions/upload-artifact@v3
       with:
-        name: debian-dev-image-${{ matrix.architecture }}
-        path: debian.raw
+        name: ${{ matrix.distro }}-dev-image-${{ matrix.architecture }}
+        path: ${{ matrix.distro }}-dev.raw
         retention-days: 3
