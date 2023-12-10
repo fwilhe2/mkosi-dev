@@ -35,3 +35,30 @@ jobs:
         name: ${{ matrix.distro }}-image-${{ matrix.architecture }}
         path: ${{ matrix.distro }}.raw
         retention-days: 3
+
+  dev-image:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        architecture:
+        - 'arm64'
+        - 'x86-64'
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Setup mkosi
+      uses: systemd/mkosi@v19
+    - name: Summary
+      run: |
+        sudo mkosi --distribution=debian summary
+    - name: Build Image
+      run: |
+        sudo mkosi --root-password=toor --distribution=debian --profile=dev --architecture=${{ matrix.architecture }}
+    - name: Upload Image
+      uses: actions/upload-artifact@v3
+      with:
+        name: debian-dev-image-${{ matrix.architecture }}
+        path: debian.raw
+        retention-days: 3
