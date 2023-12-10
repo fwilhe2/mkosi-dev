@@ -28,7 +28,7 @@ gh run download --name debian-image-arm64
 Create vm
 
 ```
-limactl create --name fedora fedora.yaml
+limactl create --name fedora lima-fedora.yaml
 
-limactl create --name debian debian.yaml
+limactl create --name debian lima-debian.yaml
 ```
