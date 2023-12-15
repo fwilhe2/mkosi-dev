@@ -30,7 +30,7 @@ jobs:
       run: |
         sudo mkosi --root-password=toor --distribution=${{ matrix.distro }} --architecture=${{ matrix.architecture }}
     - name: Upload Image
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-image-${{ matrix.architecture }}
         path: ${{ matrix.distro }}.raw
@@ -60,7 +60,7 @@ jobs:
       run: |
         sudo mkosi --root-password=toor --distribution=${{ matrix.distro }} --profile=dev --architecture=${{ matrix.architecture }}
     - name: Upload Image
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-dev-image-${{ matrix.architecture }}
         path: ${{ matrix.distro }}.raw
