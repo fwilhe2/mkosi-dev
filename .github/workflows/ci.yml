@@ -29,11 +29,12 @@ jobs:
     - name: Build Image
       run: |
         sudo mkosi --root-password=toor --distribution=${{ matrix.distro }} --architecture=${{ matrix.architecture }}
+    - run: sudo tar czf ${{ matrix.distro }}.tgz ${{ matrix.distro }}
     - name: Upload Image
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-image-${{ matrix.architecture }}
-        path: ${{ matrix.distro }}/
+        path: ${{ matrix.distro }}.tgz
         retention-days: 3
 
   dev-image:
@@ -59,9 +60,10 @@ jobs:
     - name: Build Image
       run: |
         sudo mkosi --root-password=toor --distribution=${{ matrix.distro }} --profile=dev --architecture=${{ matrix.architecture }}
+    - run: sudo tar czf ${{ matrix.distro }}.tgz ${{ matrix.distro }}
     - name: Upload Image
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-dev-image-${{ matrix.architecture }}
-        path: ${{ matrix.distro }}/
+        path: ${{ matrix.distro }}.tgz
         retention-days: 3
