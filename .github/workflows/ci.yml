@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-image-${{ matrix.architecture }}
-        path: ${{ matrix.distro }}.raw
+        path: ${{ matrix.distro }}/
         retention-days: 3
 
   dev-image:
@@ -63,5 +63,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.distro }}-dev-image-${{ matrix.architecture }}
-        path: ${{ matrix.distro }}.raw
+        path: ${{ matrix.distro }}/
         retention-days: 3
