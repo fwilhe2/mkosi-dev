@@ -1,0 +1,3 @@
+#!/bin/bash
+
+useradd --user-group --create-home --shell=/usr/bin/bash --password='$1$plC96OF7$W7MIAi9KXjA0PQ/T2YnJD1' user
