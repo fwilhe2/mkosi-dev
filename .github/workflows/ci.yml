@@ -22,7 +22,7 @@ jobs:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Setup mkosi
-      uses: systemd/mkosi@v20
+      uses: systemd/mkosi@v21
     - name: Summary
       run: |
         sudo mkosi --distribution=${{ matrix.distro }} summary
@@ -52,7 +52,7 @@ jobs:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Setup mkosi
-      uses: systemd/mkosi@v20
+      uses: systemd/mkosi@v21
     - name: Summary
       run: |
         sudo mkosi --distribution=${{ matrix.distro }} --profile=dev summary
